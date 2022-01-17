@@ -18,7 +18,7 @@ int main(void) {
         printf("Sandy would eat ‘%s’.\n", test_food );
     }
 
-    char test_p4 [30] = "llamADoG";
+    char test_p4 [30] = "rhinocerous";
     imagine_fish(test_p4 );
     printf("Just imagine, a %s!\n", test_p4 );
 }

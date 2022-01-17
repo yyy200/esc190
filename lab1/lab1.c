@@ -40,9 +40,9 @@ int sandy_eats(char menu_item[]) {
     return (int) !(j || k || l || fish || length % 2 == 1);
 }
 
-void imagine_fish(char thing[]) {
+void imagine_fish(char * thing) {
     // size of the array divided by the size of 1 character gives its length 
-    int length =  sizeof(&thing)/sizeof(thing[0]);
+    int length = strlen(thing);
     // Insert one character of fish at every space after the index of length
     char * sptr;
     sptr = &(thing[length]);
