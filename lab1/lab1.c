@@ -42,11 +42,7 @@ int sandy_eats(char menu_item[]) {
 
 void imagine_fish(char thing[]) {
     // size of the array divided by the size of 1 character gives its length 
-    int length = sizeof(&thing)/sizeof('a');
-    printf("%d\n", length);
-    length = strlen(thing);
-    printf("%d\n", length);
-
+    int length =  sizeof(&thing)/sizeof(thing[0]);
     // Insert one character of fish at every space after the index of length
     char * sptr;
     sptr = &(thing[length]);
