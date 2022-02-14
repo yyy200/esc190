@@ -10,13 +10,18 @@ int main(void){
     char ta[30] = "Albert";
     char base_item[20] = "Soup";
 
-    for(int i = 0; i < 10; i++){
+    
+    add_request(head, base_item, 20, ta);
+    add_request(head, base_item, 15, ta);
+    add_request(head, base_item, 230, ta);
+    add_request(head, base_item, 12, ta);
+    add_request(head, base_item, 5, ta);
 
-        add_request(head, base_item, i*10.3,ta);
-    }
 
+     print_ll(*head);
+    make_sorted(head);
+     printf("#########\n");
     print_ll(*head);
-    remove_request(head);
-    printf("############\n");
-    print_ll(*head);
+   
+
 }
