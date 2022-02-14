@@ -3,7 +3,7 @@
 
 void append(int** x, int* n, int val){
     (*n) ++;
-    *x = realloc(*x, *n);
+    *x = realloc(*x, (*n) * sizeof(int));
     (*x)[*n - 1] = val;
 
 /**
