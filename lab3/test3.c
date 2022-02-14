@@ -20,7 +20,7 @@ int main(void){
     add_request(head, base_item, 255, ta);
 
     print_ll(*head);
-    remove_request(head);
+    make_sorted(head);
     printf("############\n");
     print_ll(*head);
 }
