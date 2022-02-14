@@ -63,12 +63,12 @@ void sort(struct party_node **head){
     struct party_node * main_cursor = NULL; 
     struct party_node * new_head = NULL; 
 
-    printf("#### CURSOR 1 ####\n");
-    print_ll(cursor_1);
-    printf("#### CURSOR 2 ####\n");
-    print_ll(cursor_2);
-     printf("#### MAIN CURSOR ####\n");
-    print_ll(main_cursor);
+    // printf("#### CURSOR 1 ####\n");
+    // print_ll(cursor_1);
+    // printf("#### CURSOR 2 ####\n");
+    // print_ll(cursor_2);
+    //  printf("#### MAIN CURSOR ####\n");
+    // print_ll(main_cursor);
 
     if(cursor_1->price > cursor_2->price){
         main_cursor = cursor_1;
@@ -97,8 +97,8 @@ void sort(struct party_node **head){
         main_cursor->next = NULL;
     }
 
-    printf("#### MAIN CURSOR v1 ####\n");
-    print_ll(main_cursor);
+    // printf("#### MAIN CURSOR v1 ####\n");
+    // print_ll(main_cursor);
 
 
     if(cursor_1 != NULL) {
@@ -108,12 +108,12 @@ void sort(struct party_node **head){
         main_cursor->next = cursor_2;
     }
 
-    printf("#### CURSOR 1 v2 ####\n");
-    print_ll(cursor_1);
-    printf("#### CURSOR 2 v2 ####\n");
-    print_ll(cursor_2);
-    printf("#### MAIN CURSOR v2 ####\n");
-    print_ll(main_cursor);
+    // printf("#### CURSOR 1 v2 ####\n");
+    // print_ll(cursor_1);
+    // printf("#### CURSOR 2 v2 ####\n");
+    // print_ll(cursor_2);
+    // printf("#### MAIN CURSOR v2 ####\n");
+    // print_ll(main_cursor);
 
     *head = new_head;
 }
