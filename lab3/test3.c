@@ -23,4 +23,7 @@ int main(void){
     make_sorted(head);
     printf("############\n");
     print_ll(*head);
+
+    printf("Remaining budget: %f\n", finalize_list(head, 1000));
+    print_ll(*head);
 }
