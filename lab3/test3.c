@@ -16,6 +16,7 @@ int main(void){
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     print_ll(*head);
     printf("########\n");
     make_sorted(head);
@@ -25,4 +26,10 @@ int main(void){
     remove_request(head);
     printf("############\n");
     print_ll(*head);
+=======
+    print_ll(*head);
+    remove_request(head);
+    printf("############\n");
+    print_ll(*head);
+>>>>>>> parent of e7225bb (I am the best coder in the world no one is above me this is a long commit messagge . OMG i am so amazing?)
 }

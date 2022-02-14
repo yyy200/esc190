@@ -30,7 +30,6 @@ void remove_request(struct party_node **head) {
     *head = new_head;
 };
 
-<<<<<<< HEAD
 void sort(struct party_node **head){
     // Go through list, find midpoint
     struct party_node * mid = *head;
@@ -124,13 +123,8 @@ void sort(struct party_node **head){
     *head = new_head;
 }
 
-=======
->>>>>>> parent of e7225bb (I am the best coder in the world no one is above me this is a long commit messagge . OMG i am so amazing?)
 void make_sorted(struct party_node **head){
-    // Go through list, find midpoint
-    // if only one node is present -> list is sorted 
-    // pass head and mid to make_sorted
-    // sort the returned list from recursive call based on price
+    sort(head);
 };
 
 double finalize_list(struct party_node **head , double budget ) {
