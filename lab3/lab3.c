@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include<stdlib.h>
-#include"lab3.h"
+#include <stdlib.h>
+#include "lab3.h"
 
 
 int add_request(struct party_node **head, char *item, double price, char *ta){
