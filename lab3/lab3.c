@@ -54,6 +54,7 @@ void sort(struct party_node **head){
     if(length  == 1) {
         return;
     }
+
     struct party_node * aftermid = mid->next;
 
     sort(&aftermid);
@@ -85,6 +86,7 @@ void sort(struct party_node **head){
     
     main_cursor->next = NULL;
     new_head = main_cursor;
+    
     while(cursor_1->next != NULL && cursor_2 != NULL) {
         if(cursor_1->price > cursor_2->price){
             main_cursor->next = cursor_1;

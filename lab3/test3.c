@@ -18,9 +18,9 @@ int main(void){
     add_request(head, base_item, 5, ta);
 
 
-     print_ll(*head);
+    print_ll(*head);
+    printf("########\n");
     make_sorted(head);
-     printf("#########\n");
     print_ll(*head);
    
 
