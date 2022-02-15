@@ -20,10 +20,11 @@ int main(void){
     add_request(head, base_item, 255, ta);
 
     print_ll(*head);
-    make_sorted(head);
-    printf("############\n");
+    // make_sorted(head);
+    // printf("############\n");
+    remove_request(head);
     print_ll(*head);
 
-    printf("Remaining budget: %f\n", finalize_list(head, 1000));
-    print_ll(*head);
+    // printf("Remaining budget: %f\n", finalize_list(head, 1000));
+    // print_ll(*head);
 }

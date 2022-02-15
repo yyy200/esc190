@@ -12,8 +12,9 @@ int add_request(struct party_node **head, char *item, double price, char *ta){
 
     struct party_node* new_node = malloc(sizeof(struct party_node));
 
-    new_node->item = malloc(sizeof(*item)*strlen(item));
-    new_node->ta = malloc(sizeof(*ta)*strlen(ta));
+    // Allocating extra for null character
+    new_node->item = malloc(sizeof(*item)*strlen(item) + 1);
+    new_node->ta = malloc(sizeof(*ta)*strlen(ta) + 1);
     
     strcpy(new_node->item, item);
     new_node->price = price;
@@ -24,9 +25,15 @@ int add_request(struct party_node **head, char *item, double price, char *ta){
 }
 
 void remove_request(struct party_node **head) {
-    struct party_node* new_head = (*head)->next;
-    free(*head);
-    *head = new_head;
+    if (*head == NULL) return;
+
+    struct party_node* temp = *head;
+    *head = (*head)->next;
+    
+    free(temp->ta);
+    free(temp->item);
+    free(temp);
+    
 };
 
 void sort(struct party_node **head){
