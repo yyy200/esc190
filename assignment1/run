@@ -1,1 +1,2 @@
-make c-test && ./c-test && rm c-test
+make c-test && ./c-test 
+rm c-test
