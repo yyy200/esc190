@@ -1,4 +1,1 @@
 L1,Borger,$5.99
-B3,Bonana,$2.50
-B2,Banona,$2.60
-B1,Banano,$2.70

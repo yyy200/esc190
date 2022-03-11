@@ -5,6 +5,7 @@
 
 int main(void) {
     Restaurant * resto = initialize_restaurant("The cooles retauran");
+    print_menu(resto->menu);
     char item[] ="2,3,3";
     char item2[] ="2,3,3";
     char item3[] ="2,3,3";

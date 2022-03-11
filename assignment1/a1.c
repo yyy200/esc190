@@ -1,4 +1,4 @@
-#define  _GNU_SOURCE
+// #define  _GNU_SOURCE
 #include "a1.h"
 
 /**
@@ -30,57 +30,122 @@ Restaurant* initialize_restaurant(char* name) {
 	return resto;
 };
 
-Menu* load_menu(char* fname) {
-	FILE* file_ptr, *fp;
 
-	file_ptr = fopen(fname, "r");
-	fp = fopen(fname, "r");
-
-	char ch;
-	int lines = 0;
-
-	while(!feof(fp))
-	{
-		ch = fgetc(fp);
-		if(ch == '\n') lines++;
-	}
-	lines ++;
-
-	
-
-	Menu * menu = malloc(sizeof(Menu));
-	menu->item_codes = malloc(sizeof(char *) * lines);
-	menu->item_names = malloc(sizeof(char *) * lines);
-	menu->item_cost_per_unit = malloc(sizeof(double) * lines);
-	menu->num_items = lines;
-
-	char * code, * item, * price;
-
+Menu* load_menu(char* fname){
+	FILE *fp = fopen(fname, "r");
 	char* line = NULL;
 	size_t line_len = 0;
+	const char s[2] = MENU_DELIM; //split the string by commas
 
-	for (int index = 0; index < lines ; index ++){
-		getline(&line, &line_len, file_ptr);
-		code = strtok(line, MENU_DELIM);
-		item = strtok(NULL, MENU_DELIM);
-		price = strtok(NULL, MENU_DELIM);
-    
-		menu->item_codes[index] = malloc(sizeof(char) * ITEM_CODE_LENGTH);
-		strcpy(menu->item_codes[index], code);
-
-		menu->item_names[index] = malloc(sizeof(char) * (strlen(item) + 1));
-		strcpy(menu->item_names[index], item);
-
-		menu->item_cost_per_unit[index] = atof(&(price[1]));
+	Menu *menu = malloc(sizeof(Menu)); //initialize menu struct
+	int count = 0; //count the # of lines in the string
+	while(getline(&line, &line_len, fp) != -1){
+		count++;
 	}
 
-  free(line);
+	free(line);
 
-    fclose(file_ptr);
-	fclose(fp);
+	//allocate memory for contents of struct
+	menu->num_items = count;
+  //printf("%i\n", count);
+	menu->item_codes = malloc(sizeof(char*)*count + 1);
+	menu->item_names = malloc(sizeof(char*)*count + 1);
+	menu->item_cost_per_unit = malloc(sizeof(double*)*count + 1);
+  fclose(fp);
 
-    return menu;
+	//go through the menu.txt file again, split up each line by commas and add the individual sections to the struct
+  FILE *fp1 = fopen(fname, "r");
+	char* line1 = NULL;
+	size_t line_len1 = 0;
+	count = 0;
+  
+
+	while(getline(&line1, &line_len1, fp1) != -1){ //implicitly allocates memory to line1 -> need to be freed
+    //printf("count: %i\n", count);
+		char *token;
+		token = strtok(line1, s);
+    //printf("%s\n", line1);
+		menu->item_codes[count] = malloc(sizeof(char)*ITEM_CODE_LENGTH); //allocate space for item_code 
+		strcpy(menu->item_codes[count], token); //copy item_code into struct
+    //printf("%s\n",menu->item_codes[count]);
+		int num = 0; //check whether string token is to be inputted into item_names or item_cost_per_unit
+		while(token != NULL && num <= 1){
+      //printf("num: %i\n", num);
+			token = strtok(NULL, s);
+			if(num == 0){ //item names
+				menu->item_names[count] = malloc(sizeof(char)* MAX_ITEM_NAME_LENGTH);
+				strcpy(menu->item_names[count], token);
+        //printf("item name: %s\n",menu->item_names[count]);
+			}else{ //item_cost_per_unit
+        char* new_token = token + 1;
+				menu->item_cost_per_unit[count] = atof(new_token);
+        //printf("cost: %lf\n",menu->item_cost_per_unit[count]);
+			}
+			num++;
+      //printf("num: %i\n", num);
+		}
+
+		count++;
+    //printf("test\n");
+	}
+	free(line1);
+
+	fclose(fp1); // close file
+	return menu;
+
 }
+
+// Menu* load_menu(char* fname) {
+// 	FILE* file_ptr, *fp;
+
+// 	fp = fopen(fname, "r");
+
+// 	char ch;
+// 	int lines = 0;
+
+// 	while(!feof(fp))
+// 	{
+// 		ch = fgetc(fp);
+// 		if(ch == '\n') lines++;
+// 	}
+// 	lines ++;
+// 	fclose(fp);
+	
+
+// 	Menu * menu = malloc(sizeof(Menu));
+// 	menu->item_codes = malloc(sizeof(char *) * lines);
+// 	menu->item_names = malloc(sizeof(char *) * lines);
+// 	menu->item_cost_per_unit = malloc(sizeof(double) * lines);
+// 	menu->num_items = lines;
+
+// 	char * code, * item, * price;
+
+// 	char* line = NULL;
+// 	size_t line_len = 0;
+
+// 	file_ptr = fopen(fname, "r+");
+// 	for (int index = 0; index < lines ; index ++){
+// 		getline(&line, &line_len, file_ptr);
+// 		code = strtok(line, MENU_DELIM);
+// 		item = strtok(NULL, MENU_DELIM);
+// 		price = strtok(NULL, "\n");
+    
+// 		menu->item_codes[index] = malloc(sizeof(char) * ITEM_CODE_LENGTH);
+// 		strcpy(menu->item_codes[index], code);
+
+// 		menu->item_names[index] = malloc(sizeof(char) * strlen(item));
+// 		strcpy(menu->item_names[index], item);
+
+// 		menu->item_cost_per_unit[index] = atof(&(price[1]));
+// 	}
+
+//   	free(line);
+
+//     fclose(file_ptr);
+	
+
+//     return menu;
+// }
 
 Order* build_order(char* items, char* quantities) {
 	Order * order = malloc(sizeof(Order));
@@ -94,7 +159,7 @@ Order* build_order(char* items, char* quantities) {
 	int i = 0;
 	while( token != NULL ) {
 		order->item_codes[i] = malloc(sizeof(char) * ITEM_CODE_LENGTH);
-		strncpy(order->item_codes[i], items + i * 2,  2);
+		strncpy(order->item_codes[i], items + i * (ITEM_CODE_LENGTH - 1),  (ITEM_CODE_LENGTH - 1));
     order->item_codes[i][2] = '\0';
 		order->item_quantities[i] = atoi(token);
 		i ++;
