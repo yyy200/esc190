@@ -1,7 +1,7 @@
-
-
-L1    Borger    $5.99
-L2    Borger    $5.99
-L3    Borger    $5.99
-L4    Borger    $5.99
-L5    Borger    $5.99
+        Q5,Cow Sandwich,$5.99
+L2,Chicken Tuna Salad Sandwich,$4.50
+R4,Some Kale Salad Greens,$8.50
+D9,Pig and Potatoes,$12.99
+B4,Bean Juice,$2.99
+G2,Milk and Sugar,$3.50
+Z1,Zebrafish Cocktail,$200.50

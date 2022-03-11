@@ -6,7 +6,7 @@
 #define MAX_ITEM_NAME_LENGTH 100
 #define MAX_ITEM_QUANTITY_DIGITS 20
 
-#define MENU_DELIM "    "
+#define MENU_DELIM ","
 #define MENU_FNAME "menu.txt"
 
 #define TAX_RATE 13

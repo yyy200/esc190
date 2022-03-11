@@ -87,39 +87,32 @@ Menu* load_menu(char* fname){
 		int index = 0;
 		
 		while (in(line1[index], whitespace, n)) index ++;
+		char * temp = malloc(sizeof(char) * strlen(&(line1[index])));
+		strcpy(temp, &(line1[index]));
+		free(line1);
+		line1 = temp;
 
-		printf("%d\n", in(line1[index], whitespace, 3));
-		printf("%s\n", &(line1[index]));
-		// char * temp = malloc(sizeof(char) * (strlen(line1) - 1));
-		// strcpy(temp, &(line1[index]));
-		// free(line1);
-		// line1 = temp;
-    //printf("count: %i\n", count);
+
+
 		char *token;
 		token = strtok(line1, s);
-    //printf("%s\n", line1);
+
+
 		menu->item_codes[count] = malloc(sizeof(char)*ITEM_CODE_LENGTH); //allocate space for item_code 
 		strcpy(menu->item_codes[count], token); //copy item_code into struct
-    //printf("%s\n",menu->item_codes[count]);
-		int num = 0; //check whether string token is to be inputted into item_names or item_cost_per_unit
-		while(token != NULL && num <= 1){
-      //printf("num: %i\n", num);
-			token = strtok(NULL, s);
-			if(num == 0){ //item names
-				menu->item_names[count] = malloc(sizeof(char)* MAX_ITEM_NAME_LENGTH);
-				strcpy(menu->item_names[count], token);
-        //printf("item name: %s\n",menu->item_names[count]);
-			}else{ //item_cost_per_unit
-        char* new_token = token + 1;
-				menu->item_cost_per_unit[count] = atof(new_token);
-        //printf("cost: %lf\n",menu->item_cost_per_unit[count]);
-			}
-			num++;
-      //printf("num: %i\n", num);
-		}
+
+
+		token = strtok(NULL, s);
+
+		menu->item_names[count] = malloc(sizeof(char) * (strlen(token) + 1));
+		strcpy(menu->item_names[count], token);
+
+		token = strtok(NULL, "\n");
+
+		menu->item_cost_per_unit[count] = atof(&(token[1]));
+
 
 		count++;
-    //printf("test\n");
 	}
 	free(line1);
 
