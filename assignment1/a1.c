@@ -31,17 +31,36 @@ Restaurant* initialize_restaurant(char* name) {
 };
 
 
+int in(char character, char elements[], int n) {
+	for (int i = 0; i < n; i++){
+		if(character==elements[i]) return 1;
+	}
+	return 0;
+}
+
+int empty_line(char * line,char elements[], int n) {
+	for(int i = 0; i < strlen(line); i++) {
+		if(!in(line[i], elements, n)) return 0;
+	}
+	return 1;
+}
+
 Menu* load_menu(char* fname){
 	FILE *fp = fopen(fname, "r");
 	char* line = NULL;
 	size_t line_len = 0;
-	const char s[2] = MENU_DELIM; //split the string by commas
-
+	const char s[] = MENU_DELIM; //split the string by commas
+	char whitespace[]= {'\n', '\r', '\t', ' '};
+	int n = 4;
 	Menu *menu = malloc(sizeof(Menu)); //initialize menu struct
-	int count = 0; //count the # of lines in the string
+	int count = 0; //count the # of lines in the strini
+	int empty = 0;
 	while(getline(&line, &line_len, fp) != -1){
+		if(empty_line(line, whitespace, n)) empty ++;
 		count++;
 	}
+
+	count = count - empty;
 
 	free(line);
 
@@ -54,13 +73,27 @@ Menu* load_menu(char* fname){
   fclose(fp);
 
 	//go through the menu.txt file again, split up each line by commas and add the individual sections to the struct
-  FILE *fp1 = fopen(fname, "r");
+  	FILE *fp1 = fopen(fname, "r");
 	char* line1 = NULL;
 	size_t line_len1 = 0;
 	count = 0;
+
+	for (int i = 0; i < empty; i ++){
+		getline(&line1, &line_len1, fp1);
+	}
   
 
 	while(getline(&line1, &line_len1, fp1) != -1){ //implicitly allocates memory to line1 -> need to be freed
+		int index = 0;
+		
+		while (in(line1[index], whitespace, n)) index ++;
+
+		printf("%d\n", in(line1[index], whitespace, 3));
+		printf("%s\n", &(line1[index]));
+		// char * temp = malloc(sizeof(char) * (strlen(line1) - 1));
+		// strcpy(temp, &(line1[index]));
+		// free(line1);
+		// line1 = temp;
     //printf("count: %i\n", count);
 		char *token;
 		token = strtok(line1, s);

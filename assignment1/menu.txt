@@ -1,1 +1,7 @@
-L1,Borger,$5.99
+
+
+L1    Borger    $5.99
+L2    Borger    $5.99
+L3    Borger    $5.99
+L4    Borger    $5.99
+L5    Borger    $5.99
