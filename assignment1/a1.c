@@ -144,13 +144,13 @@ double get_item_cost(char* item_code, Menu* menu){
 	for(i = 0; i < menu->num_items; i ++) {
 		if(strcmp(menu->item_codes[i], item_code) == 0) break;
 	}
-	return menu->item_cost_per_unit[i];
+	return (double) menu->item_cost_per_unit[i];
 };
 
 double get_order_subtotal(Order* order, Menu* menu){
 	double sub_total = 0;
 	for(int i = 0; i < order->num_items; i ++) {
-		sub_total += get_item_cost(order->item_codes[i], menu) * (order->item_quantities[i]);
+		sub_total += get_item_cost(order->item_codes[i], menu) * ((double) order->item_quantities[i]);
 	}
 
 	return sub_total;
@@ -158,7 +158,7 @@ double get_order_subtotal(Order* order, Menu* menu){
 
 double get_order_total(Order* order, Menu* menu){
 	double sub_total = get_order_subtotal(order, menu);
-	return sub_total * (1 + (float)TAX_RATE/100);
+	return sub_total *(double) (1 + (double)TAX_RATE/100);
 }
 
 int get_num_completed_orders(Restaurant* restaurant){
