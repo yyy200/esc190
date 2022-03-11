@@ -2,6 +2,5 @@ make "$1"
 valgrind valgrind --leak-check=full \
          --show-leak-kinds=all \
          --track-origins=yes \
-         --verbose \
         ./$1
 rm "$1"

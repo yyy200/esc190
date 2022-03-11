@@ -64,7 +64,7 @@ Menu* load_menu(char* fname) {
 		code = strtok(line, MENU_DELIM);
 		item = strtok(NULL, MENU_DELIM);
 		price = strtok(NULL, MENU_DELIM);
-
+    
 		menu->item_codes[index] = malloc(sizeof(char) * ITEM_CODE_LENGTH);
 		strcpy(menu->item_codes[index], code);
 
@@ -73,6 +73,8 @@ Menu* load_menu(char* fname) {
 
 		menu->item_cost_per_unit[index] = atof(&(price[1]));
 	}
+
+  free(line);
 
     fclose(file_ptr);
 	fclose(fp);
@@ -93,6 +95,7 @@ Order* build_order(char* items, char* quantities) {
 	while( token != NULL ) {
 		order->item_codes[i] = malloc(sizeof(char) * ITEM_CODE_LENGTH);
 		strncpy(order->item_codes[i], items + i * 2,  2);
+    order->item_codes[i][2] = '\0';
 		order->item_quantities[i] = atoi(token);
 		i ++;
 		token= strtok(NULL, s);
@@ -137,7 +140,7 @@ Order* dequeue_order(Restaurant* restaurant) {
 	Getting information about our orders and order status
 */
 double get_item_cost(char* item_code, Menu* menu){
-	int i;
+  int i;
 	for(i = 0; i < menu->num_items; i ++) {
 		if(strcmp(menu->item_codes[i], item_code) == 0) break;
 	}
@@ -201,6 +204,8 @@ void close_restaurant(Restaurant** restaurant) {
 	free((*restaurant)->pending_orders);
 	free((*restaurant)->name);
 	clear_menu(&((*restaurant)->menu));
+  free(*restaurant);
+  *restaurant = NULL;
 }
 
 void print_menu(Menu* menu) {
