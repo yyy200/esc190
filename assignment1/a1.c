@@ -85,8 +85,8 @@ Menu* load_menu(char* fname) {
 Order* build_order(char* items, char* quantities) {
 	Order * order = malloc(sizeof(Order));
 	order->num_items = strlen(items)/2;
-	order->item_codes = malloc(sizeof(char *) * order->num_items);
-	order->item_quantities = malloc(sizeof(int) * order->num_items);
+	order->item_codes = malloc(sizeof(char *) * (order->num_items));
+	order->item_quantities = malloc(sizeof(int) * (order->num_items));
 
 	const char s[] = ",";
 
@@ -203,6 +203,7 @@ void close_restaurant(Restaurant** restaurant) {
 
 	free((*restaurant)->pending_orders);
 	free((*restaurant)->name);
+  
 	clear_menu(&((*restaurant)->menu));
   free(*restaurant);
   *restaurant = NULL;
