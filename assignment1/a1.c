@@ -31,6 +31,7 @@ Restaurant* initialize_restaurant(char* name) {
 
 Menu* load_menu(char* fname) {
 	FILE* file_ptr, *fp;
+
 	file_ptr = fopen(fname, "r");
 	fp = fopen(fname, "r");
 
@@ -42,6 +43,9 @@ Menu* load_menu(char* fname) {
 		ch = fgetc(fp);
 		if(ch == '\n') lines++;
 	}
+	lines ++;
+
+	
 
 	Menu * menu = malloc(sizeof(Menu));
 	menu->item_codes = malloc(sizeof(char *) * lines);
@@ -49,15 +53,17 @@ Menu* load_menu(char* fname) {
 	menu->item_cost_per_unit = malloc(sizeof(double) * lines);
 	menu->num_items = lines;
 
-	char code[ITEM_CODE_LENGTH], item[MAX_ITEM_NAME_LENGTH], price[MAX_ITEM_QUANTITY_DIGITS];
-	int index = 0;
-	char format[] = "%[^_]_%[^_]_%s";
-	format[3] = *MENU_DELIM;
-	format[5] = *MENU_DELIM;
-	format[9] = *MENU_DELIM;
-	format[11] = *MENU_DELIM;
+	char * code, * item, * price;
 
-	while(fscanf(file_ptr, format, code, item, price) == 3) {
+	char* line = NULL;
+	size_t line_len = 0;
+
+	for (int index = 0; index < lines ; index ++){
+		getline(&line, &line_len, file_ptr);
+		code = strtok(line, MENU_DELIM);
+		item = strtok(NULL, MENU_DELIM);
+		price = strtok(NULL, MENU_DELIM);
+
 		menu->item_codes[index] = malloc(sizeof(char) * ITEM_CODE_LENGTH);
 		strcpy(menu->item_codes[index], code);
 
@@ -65,11 +71,8 @@ Menu* load_menu(char* fname) {
 		strcpy(menu->item_names[index], item);
 
 		menu->item_cost_per_unit[index] = atof(&(price[1]));
+	}
 
-		index ++;
-    }
-
-    // Closing the file
     fclose(file_ptr);
 	fclose(fp);
 

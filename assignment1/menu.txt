@@ -1,6 +1,2 @@
-L1,Chicken Sandwich,$5.99
-L2,Egg Salad Sandwich,$4.50
-L3,Fresh Greens,$8.50 
-D1,Steak and Potatoes,$12.99
-B1,Coffee,$2.99
-B2,Hot Chocolate,$3.50 
+L1,Borger,$5.99
+B3,Banana,$2.50
