@@ -26,6 +26,6 @@ int main(void) {
   // Order * order6 = dequeue_order(resto);
   // print_order(order6);
   // clear_order(&order6);
-  close_restaurant(&resto);
+  // close_restaurant(&resto);
     return 0;
 }
