@@ -49,7 +49,7 @@ Menu* load_menu(char* fname){
 	FILE *fp = fopen(fname, "r");
 	char* line = NULL;
 	size_t line_len = 0;
-	const char s[] = MENU_DELIM; //split the string by commas
+
 	char whitespace[]= {'\n', '\r', '\t', ' '};
 	int n = 4;
 	Menu *menu = malloc(sizeof(Menu)); //initialize menu struct
@@ -95,19 +95,19 @@ Menu* load_menu(char* fname){
 
 
 		char *token;
-		token = strtok(line1, s);
+		token = strtok(line1, MENU_DELIM);
 
 
 		menu->item_codes[count] = malloc(sizeof(char)*ITEM_CODE_LENGTH); //allocate space for item_code 
 		strcpy(menu->item_codes[count], token); //copy item_code into struct
 
 
-		token = strtok(NULL, s);
+		token = strtok(NULL, MENU_DELIM);
 
-		menu->item_names[count] = malloc(sizeof(char) * (strlen(token) + 1));
-		strcpy(menu->item_names[count], token);
+		(menu->item_names)[count] = malloc(sizeof(char) * (MAX_ITEM_NAME_LENGTH + 1));
+		strcpy((menu->item_names)[count], token);
 
-		token = strtok(NULL, "\n");
+		token = strtok(NULL, MENU_DELIM);
 
 		menu->item_cost_per_unit[count] = atof(&(token[1]));
 
@@ -117,6 +117,7 @@ Menu* load_menu(char* fname){
 	free(line1);
 
 	fclose(fp1); // close file
+
 	return menu;
 
 }
