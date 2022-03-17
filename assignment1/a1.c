@@ -92,24 +92,18 @@ Menu* load_menu(char* fname){
 		free(line1);
 		line1 = temp;
 
-
-
 		char *token;
 		token = strtok(line1, MENU_DELIM);
-
 
 		menu->item_codes[count] = malloc(sizeof(char)*ITEM_CODE_LENGTH); //allocate space for item_code 
 		strcpy(menu->item_codes[count], token); //copy item_code into struct
 
-
 		token = strtok(NULL, MENU_DELIM);
-
 		(menu->item_names)[count] = malloc(sizeof(char) * (MAX_ITEM_NAME_LENGTH + 1));
 		strcpy((menu->item_names)[count], token);
 
 		token = strtok(NULL, MENU_DELIM);
-
-		menu->item_cost_per_unit[count] = atof(&(token[1]));
+		menu->item_cost_per_unit[count] = atof(token);
 
 
 		count++;
