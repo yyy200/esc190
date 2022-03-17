@@ -1,4 +1,4 @@
-// #define  _GNU_SOURCE
+#define  _GNU_SOURCE
 #include "a1.h"
 
 /**
@@ -86,19 +86,19 @@ Menu* load_menu(char* fname){
 	while(getline(&line1, &line_len1, fp1) != -1){ //implicitly allocates memory to line1 -> need to be freed
 		int index = 0;
 		
-		while (in(line1[index], whitespace, n)) index ++;
-		char * temp = malloc(sizeof(char) * strlen(&(line1[index])));
-		strcpy(temp, &(line1[index]));
-		free(line1);
-		line1 = temp;
-
-
-
+		// while (in(line1[index], whitespace, n)) index ++;
+		// char * temp = malloc(sizeof(char) * strlen(&(line1[index])));
+		// strcpy(temp, &(line1[index]));
+  //   free(line1);
+		// line1 = temp;
+    // printf("%s\n", line1);
+    // return menu;
 		char *token;
+
 		token = strtok(line1, MENU_DELIM);
-
-
-		menu->item_codes[count] = malloc(sizeof(char)*ITEM_CODE_LENGTH); //allocate space for item_code 
+		menu->item_codes[count] = malloc(sizeof(char)*ITEM_CODE_LENGTH); 
+    
+    //allocate space for item_code 
 		strcpy(menu->item_codes[count], token); //copy item_code into struct
 
 
