@@ -106,7 +106,7 @@ Menu* load_menu(char* fname){
 		strcpy((menu->item_names)[count], token);
 
 		token = strtok(NULL, MENU_DELIM);
-		menu->item_cost_per_unit[count] = atof(token);
+		menu->item_cost_per_unit[count] = atof(&(token[1]));
 
 
 		count++;
