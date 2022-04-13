@@ -1,2 +1,0 @@
-make c-test && ./c-test 
-rm c-test

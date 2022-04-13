@@ -1,6 +1,0 @@
-make "$1"
-valgrind valgrind --leak-check=full \
-         --show-leak-kinds=all \
-         --track-origins=yes \
-        ./$1
-rm "$1"
