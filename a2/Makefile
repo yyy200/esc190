@@ -1,2 +1,2 @@
 test:
-	clang -o test test.c a2.c
+	clang -g -o test test.c a2.c

@@ -81,7 +81,7 @@ char *read_code(char *code){
     for(int i = 0; i < zero; i ++) code[zeroes[i]] = 't';
 
     int index = 0;
-    int i;
+    int i = 0;
     int message_index = 0;
     int size = 256 - one - zero;
     char *msg = malloc(sizeof(char) * (size / 8 + 1));

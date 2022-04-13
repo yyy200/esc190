@@ -7,8 +7,8 @@ int main(void) {
     // printf("%s\n", bin_string);
     // printf("%c\n", xor_decrypt(bin_string));
     // free(bin_string);
-    printf("bin_string: %s\n", xor_encrypt('C'));
-    printf("bin_string length: %lu\n", strlen(xor_encrypt('C')));
+    // printf("bin_string: %s\n", xor_encrypt('C'));
+    // printf("bin_string length: %lu\n", strlen(xor_encrypt('C')));
 
     // printf("%c\n", xor_decrypt(xor_encrypt('d')));
 
@@ -44,6 +44,8 @@ int main(void) {
         if((i+1)%16 == 0 )  printf("\n");
     }
     char *decoded = read_code(code);
+  free(code);
+  free(decoded);
     printf("%s\n", decoded);
     // return 0;
 }
