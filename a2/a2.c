@@ -201,3 +201,5 @@ int calc_ld(char *sandy, char *cima){
     free(d);
     return minimum;
 }
+
+
